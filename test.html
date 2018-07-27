@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="myText" value="10">
+    <p id="demo">Let AJAX change this text.</p>
+    <button type="button" onclick="loadDoc()">Change Content</button>
+
+    <p>number=10 取出數據為:</p>
+    <div id = 'footer'></div>
+
+    <script>
+        var request = new XMLHttpRequest();   //number=10
+        request.onreadystatechange = function () {
+            if (request.readyState === 4) {
+                document.getElementById("footer").innerHTML = request.responseText;    
+            }
+        };
+        request.open('GET', 'http://localhost:3000/getData?number=10');    
+        request.send();
+
+
+        function loadDoc() {    //user interface
+            var xhttp = new XMLHttpRequest();
+            var x = Number(document.getElementById("myText").value)
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("demo").innerHTML = this.responseText;
+                }
+            };
+            xhttp.open("GET", `http://localhost:3000/getData?number=${x}`, true);
+            xhttp.send();
+        }
+
+        </script>
+
+</body>
+</html>
