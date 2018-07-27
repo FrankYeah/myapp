@@ -8,15 +8,26 @@ app.get('/', (req, res) => {
     res.send('hello, My Server!')
 });
 
+
+
 app.get('/getData', (req, res) => {   
-    const result = ((1 + Number(req.query.number)) *Number(req.query.number))/2;
-    console.dir(result);    
-    res.send(`${result}`);
+   var result;
+    if (isNaN(req.query.number)){
+       result = 'Wrong Parameters'
+    }else{
+        result = ((1 + Number(req.query.number)) *Number(req.query.number))/2;
+    }   
+
+    console.dir(result); 
+    res.send(`${result}`)
 });
 
 app.get('/getData', (req, res) => {
-    res.send('Wrong Parameters')
+    res.send(`Wrong Parameters`)
+
 });
+
+
 
 app.get('/test.html', (req, res) => {
     res.sendFile(__dirname + '/test.html');
